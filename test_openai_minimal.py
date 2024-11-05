@@ -6,6 +6,9 @@ try:
     # Correctly retrieve the API key with the exact name
     api_key = st.secrets["OPENAI_API_KEY"]
     client = OpenAI(api_key=api_key)
+
+st.    write("Available keys in st.secrets:", list(st.secrets.keys()))
+
 except KeyError:
     st.error("OpenAI API key not found. Please add it to Streamlit secrets.")
     st.stop()
