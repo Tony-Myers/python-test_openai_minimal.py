@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 # Initialize OpenAI client with API key from Streamlit secrets
-api_key = st.secrets["OPENAI_API_KEY"]
+api_key = st.secrets["open_api_key]
 client = OpenAI(api_key=api_key)
 
 def main():
