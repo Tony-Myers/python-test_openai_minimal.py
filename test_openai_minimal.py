@@ -2,8 +2,12 @@ import streamlit as st
 from openai import OpenAI
 
 # Initialize OpenAI client with API key from Streamlit secrets
-api_key = st.secrets["OPENAI_API_KEY"]
-client = OpenAI(api_key=api_key)
+try:
+    api_key = st.secrets["OPENAI_API_KEY"]
+    client = OpenAI(api_key=api_key)
+except KeyError:
+    st.error("OpenAI API key not found. Please add it to Streamlit secrets.")
+    st.stop()
 
 def main():
     st.title("OpenAI Chat Test")
@@ -15,8 +19,8 @@ def main():
                 model="gpt-3.5-turbo",
                 messages=[{"role": "user", "content": user_input}]
             )
-            # Access the content of the first message in the response
-            message_content = response.choices[0].message.content
+            # Correctly access the response message content
+            message_content = response.choices[0].message["content"]
             st.write(message_content)
         except Exception as e:
             st.error(f"Error: {e}")
