@@ -1,14 +1,13 @@
 import streamlit as st
 from openai import OpenAI
 
+# Debugging: Check available keys in st.secrets
+st.write("Available keys in st.secrets:", list(st.secrets.keys()))
+
 # Initialize OpenAI client with API key from Streamlit secrets
 try:
-    # Correctly retrieve the API key with the exact name
     api_key = st.secrets["OPENAI_API_KEY"]
     client = OpenAI(api_key=api_key)
-
-st.    write("Available keys in st.secrets:", list(st.secrets.keys()))
-
 except KeyError:
     st.error("OpenAI API key not found. Please add it to Streamlit secrets.")
     st.stop()
@@ -23,7 +22,6 @@ def main():
                 model="gpt-3.5-turbo",
                 messages=[{"role": "user", "content": user_input}]
             )
-            # Correctly access the content of the response message
             message_content = response.choices[0].message.content
             st.write(message_content)
         except Exception as e:
@@ -31,6 +29,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
