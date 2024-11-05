@@ -7,7 +7,7 @@ st.write("Secrets found:", list(st.secrets.keys()))
 # Initialize OpenAI client with API key from Streamlit secrets
 try:
     # Retrieve the API key with the exact name as configured in Streamlit Secrets
-    api_key = st.secrets["OPENAI_API_KEY"]
+    api_key = st.secrets["OPENAI_API_KEY"]  # Correct spelling and casing
     client = OpenAI(api_key=api_key)
 except KeyError:
     st.error("OpenAI API key not found. Please add 'OPENAI_API_KEY' to Streamlit secrets.")
