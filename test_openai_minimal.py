@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 # Initialize OpenAI client with API key from Streamlit secrets
-api_key = st.secrets["open_api_key]
+api_key = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=api_key)
 
 def main():
@@ -15,10 +15,13 @@ def main():
                 model="gpt-3.5-turbo",
                 messages=[{"role": "user", "content": user_input}]
             )
-            st.write(response.choices[0].message['content'])
+            # Access the content of the first message in the response
+            message_content = response.choices[0].message.content
+            st.write(message_content)
         except Exception as e:
             st.error(f"Error: {e}")
 
 if __name__ == "__main__":
     main()
+
 
